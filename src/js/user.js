@@ -110,6 +110,8 @@ function resetTable() {
 
   const tr = document.createElement("tr")
 
+  tr.classList.add("title")
+
   columns.forEach(column => {
     const th = document.createElement("th")
     th.innerText = column.name
