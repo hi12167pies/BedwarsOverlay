@@ -1,0 +1,97 @@
+@font-face {
+  font-family: Minecraft;
+  src: url(./Minecraftia-Regular.ttf);
+}
+
+:root {
+  --font: system-ui;
+}
+
+* {
+  font-family: var(--font);
+}
+
+*:not(input) {
+  user-select: none;
+}
+
+body, html {
+  -webkit-app-region: drag;
+  margin: 0;
+  padding: 0;
+  color: white;
+  background: #1111118a;
+  font-size: 11pt;
+}
+
+/* Table */
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #222222;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #222222a6;
+}
+
+
+/* Buttons / Inputs */
+input, button {
+  outline: none;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  background: #0f0f0f;
+  color: white;
+  box-shadow: 0px 0px 10px -2px black;
+}
+
+input[type=button], input[type=submit], button {
+  cursor: pointer;
+}
+
+.close_prompt {
+  background: rgb(192, 87, 87);
+  border: none;
+  font-weight: 600;
+  padding: 5px;
+  color: white;
+}
+
+/* Prompt */
+.prompt-title {
+  display: grid;
+  grid-template-columns: 1fr 50px;
+}
+
+.prompt {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgb(32, 32, 32);
+  padding: 10px;
+  border-radius: 2px;
+}
+
+.prompt_background {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  position: absolute;
+  inset: 0;
+}
+
+/* Other */
+hr {
+  border: none;
+  border-radius: 5px;
+  background: white;
+  height: 2px;
+}
