@@ -30,13 +30,13 @@ const columns = [
   {
     name: "Finals",
     func: (playerData, element) => {
-      element.innerText = playerData.stats.Bedwars.final_kills_bedwars || 0
+      element.innerText = (playerData.stats.Bedwars.final_kills_bedwars || 0).toLocaleString()
     }
   },
   {
     name: "Wins",
     func: (playerData, element) => {
-      element.innerText = playerData.stats.Bedwars.wins_bedwars || 0
+      element.innerText = (playerData.stats.Bedwars.wins_bedwars || 0).toLocaleString()
     }
   },
   {
