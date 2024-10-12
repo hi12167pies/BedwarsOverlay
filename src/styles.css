@@ -1,6 +1,11 @@
 @font-face {
-  font-family: Minecraft;
-  src: url(./Minecraftia-Regular.ttf);
+  font-family: Minecraftia;
+  src: url(./fonts/Minecraftia-Regular.ttf);
+}
+
+@font-face {
+  font-family: Minecraft-Ten;
+  src: url(./fonts/MinecraftTen.ttf);
 }
 
 :root {
@@ -47,7 +52,7 @@ tr:nth-child(even) {
 
 
 /* Buttons / Inputs */
-input, button {
+input, button, select {
   outline: none;
   border: none;
   padding: 10px;

@@ -6,6 +6,8 @@
   <title>Bedwars Stats</title>
   <link rel="stylesheet" href="./styles.css">
 
+  <script src="js/storage.js" defer></script>
+
   <script src="js/utils.js" defer></script>
 
   <script src="js/apis.js" defer></script>
@@ -22,10 +24,19 @@
       <button class="close_prompt" id="close_prompt">Close</button>
     </div>
     <hr>
+
     <form id="api_key">
       <input type="password" id="api_key_input" placeholder="API Key">
       <input type="submit" value="Update API Key">
     </form>
+
+    <br>
+
+    <select id="font">
+      <option value="system-ui">System Font</option>
+      <option value="Minecraftia">Minecraftia Font</option>
+      <option value="Minecraft-Ten">Minecraft Ten Font</option>
+    </select>
   </div>
     
   <table id="stats"></table>

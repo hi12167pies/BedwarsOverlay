@@ -159,3 +159,19 @@ if (getApiKey() == null) {
 }
 
 resetTable()
+
+// Font
+const fontSelector = document.getElementById("font")
+
+function updateFont() {
+  if (getFont() == undefined) return
+  document.documentElement.style.setProperty("--font", getFont())
+  fontSelector.value = getFont()
+}
+
+fontSelector.addEventListener("change", event => {
+  setFontStore(fontSelector.value)
+  updateFont()
+})
+
+updateFont()

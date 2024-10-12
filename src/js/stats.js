@@ -8,21 +8,6 @@ if (home == undefined && process.env.HOMEPATH) {
 const logDirectory = path.join(home, ".lunarclient", "logs/game")
 
 /**
- * Sets the hypixel api key
- * @param {string} key 
- */
-function setApiKey(key) {
-  localStorage.setItem("api_key", key)
-}
-
-/**
- * Gets the current api key
- */
-function getApiKey() {
-  return localStorage.getItem("api_key")
-}
-
-/**
  * Loads the stats of the users
  * @param {string[]} users 
  */
