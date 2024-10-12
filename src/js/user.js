@@ -150,6 +150,7 @@ apiKeyForm.addEventListener("submit", event => {
   event.preventDefault()
 
   setApiKey(apiKeyInput.value)
+  apiKeyInput.value = ""
 })
 
 
