@@ -139,9 +139,11 @@ function getBedwarsStarColor(level) {
 
     const chars = level.toString().split("")
     
-    return chars.map((char, i) => {
+    let colourStar = chars.map((char, i) => {
       return rainbowColors[i % chars.length] + char
     }).join("")
+
+    return `&c[${colourStar}&d✫&5]` 
   }
 
   switch (prestige) {
@@ -158,5 +160,5 @@ function getBedwarsStarColor(level) {
     default: colorCode = '&6';
   }
 
-  return `${colorCode}${level}`
+  return `${colorCode}[${level}✫]`
 }
