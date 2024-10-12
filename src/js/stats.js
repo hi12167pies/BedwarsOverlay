@@ -127,7 +127,6 @@ function handleChatLogs(parsedLogs) {
         const username = command.slice(1)
         const user = (await usernamesToUUID([username]))[0]
         const stats = await getHypixelStats(user.id)
-        console.log(stats)
         addUserToTable(stats.player, user.name)
       }
 
