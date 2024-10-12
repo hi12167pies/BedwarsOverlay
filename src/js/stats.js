@@ -26,7 +26,15 @@ async function loadStats(usernames) {
   // Wait for all promises to complete
   await Promise.all(promises)
 
-  usernames.forEach(username => {
+  usernames.forEach(usernameUnknown => {
+    // The current username is unknown about the caps of it, this will get correct from mojang
+    let username = users.find(user => user.name.toLowerCase() == usernameUnknown.toLowerCase())
+    if (username == undefined) {
+      username = usernameUnknown
+    } else {
+      username = username.name
+    }
+
     const user = users.find(user => user.name.toLowerCase() == username.toLowerCase())
     if (user == undefined) {
       addUserToTable(null, username)
@@ -85,19 +93,41 @@ function watchLog(log) {
   })
 }
 
+const MESSAGE_COMMAND_PREFIX = "Can't find a player by the name of '"
+const ONLINE_PLAYERS_PREFIX = "ONLINE: "
 /**
  * Handles parsed logs
  */
 function handleChatLogs(parsedLogs) {
   const online = parsedLogs
-    .filter(log => log.startsWith("ONLINE: ")) // Filter online
+    .filter(log => log.startsWith(ONLINE_PLAYERS_PREFIX)) // Filter online
     .at(-1) // Get last
   
   if (online != undefined) {
-    const users = online.slice("ONLINE: ".length).split(", ")
+    const users = online.slice(ONLINE_PLAYERS_PREFIX.length).split(", ")
 
     loadStats(users)
   }
+
+  // Handle commands
+  parsedLogs
+    .filter(log => log.startsWith(MESSAGE_COMMAND_PREFIX))
+    .map(log => log.slice(MESSAGE_COMMAND_PREFIX.length, -1))
+    .forEach(async command => {
+      // Clear command
+      if (["c", "cl"].includes(command.toLowerCase())) {
+        resetTable()
+      }
+
+      // Add player command
+      if (command.startsWith("!")) {
+        const username = command.slice(1)
+        const user = (await usernamesToUUID([username]))[0]
+        const stats = await getHypixelStats(user.id)
+        console.log(stats)
+        addUserToTable(stats.player, user.name)
+      }
+    })
 }
 
 /**

@@ -40,6 +40,7 @@ async function usernamesToUUID(usernames) {
 
 /**
  * Uses hypixel api to get players stats
+ * @param {string} uuid
  */
 async function getHypixelStats(uuid) {
   const res = await fetch("https://api.hypixel.net/v2/player?uuid=" + uuid, {

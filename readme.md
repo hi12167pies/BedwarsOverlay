@@ -12,6 +12,11 @@
 - Press the backtick (`` ` ``) key to toggle the visibility of the overlay
 - This does not work in fullscreen!
 
+## Commands
+(This is not copied from Abyss Overlay what are you talking about?)
+- You can use the command `/w ![username]` in game to check a person's stats
+- You can clear your list with `/w c` or `/w cl`
+
 ## Why is everyone a nick?
 Your api key is invalid or you have reached a rate limit. Try resetting your key.
 
