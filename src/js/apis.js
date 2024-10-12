@@ -8,10 +8,6 @@ function dashUUID(uuid) {
 }
 
 /**
- * Uses Mojang api to convert usernames to uuids
- * @param {string[]} usernames 
- */
-/**
  * Uses Mojang API to convert usernames to UUIDs.
  * @param {string[]} usernames - List of Minecraft usernames.
  * @returns {Promise<object[]>} - Array of username-UUID mappings.
