@@ -111,7 +111,7 @@ function getHypixelPrefix(playerData) {
       return "&b[MVP]"
     case "MVP+":
     case "MVP++":
-      let plusColour = bukkitToMinecraftColourMap[playerData.rankPlusColor]
+      let plusColour = bukkitToMinecraftColourMap[playerData.rankPlusColor] || "&c"
       return rank == "MVP+" ? `&b[MVP${plusColour}+&b]` : `&6[MVP${plusColour}++&6]`
     case "YOUTUBER":
       return "&c[&fYOUTUBE&c]"
