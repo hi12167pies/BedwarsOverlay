@@ -13,3 +13,11 @@ function setFontStore(font) {
 function getFont() {
   return localStorage.getItem("font")
 }
+
+function setSortBy(id) {
+  localStorage.setItem("sortby", id)
+}
+
+function getSortBy() {
+  return localStorage.getItem("sortby")
+}

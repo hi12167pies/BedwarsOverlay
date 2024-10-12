@@ -43,7 +43,7 @@ async function loadStats(usernames) {
     addUserToTable(user.stats, username)
   })
 
-  updateWindowHeight()
+  renderTable()
 }
 
 /**
@@ -130,7 +130,7 @@ function handleChatLogs(parsedLogs) {
         addUserToTable(stats.player, user.name)
       }
 
-      updateWindowHeight()
+      renderTable()
     })
 }
 

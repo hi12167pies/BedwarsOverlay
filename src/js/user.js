@@ -9,8 +9,16 @@ const apiKeyInput = document.getElementById("api_key_input")
 const closePromptButton = document.getElementById("close_prompt")
 
 const statsTable = document.getElementById("stats")
+
+/**
+ * List of columns in the taable
+ * id:   used to identify the column
+ * name: shows in the gui
+ * func: Returns a int for sorting
+ */
 const columns = [
   {
+    id: "name",
     name: "Username",
     func: (playerData, element, extra) => {
       if (playerData == null) {
@@ -18,35 +26,49 @@ const columns = [
         return
       }
       element.innerHTML = parseMinecraftColors(getHypixelPrefix(playerData)) + " " + extra.name
+
+      return 0
     }
   },
   {
+    id: "star",
     name: "Stars",
     func: (playerData, element) => {
-      let level = playerData.achievements?.bedwars_level
+      let level = playerData?.achievements?.bedwars_level
       level = level || 0
 
       element.innerHTML = parseMinecraftColors(getBedwarsStarColor(level))
+
+      return level
     }
   },
   {
+    id: "finals",
     name: "Finals",
     func: (playerData, element) => {
-      element.innerText = (playerData.stats.Bedwars.final_kills_bedwars || 0).toLocaleString()
+      const finals = (playerData?.stats?.Bedwars?.final_kills_bedwars) || 0
+      element.innerText = finals.toLocaleString()
+      return finals
     }
   },
   {
+    id: "wins",
     name: "Wins",
     func: (playerData, element) => {
-      element.innerText = (playerData.stats.Bedwars.wins_bedwars || 0).toLocaleString()
+      const wins = (playerData?.stats?.Bedwars?.wins_bedwars )|| 0
+      element.innerText = wins.toLocaleString()
+      return wins
     }
   },
   {
+    id: "fkdr",
     name: "FKDR",
     func: (playerData, element) => {
-      let kills = playerData.stats.Bedwars.final_kills_bedwars || 0
-      let deaths = playerData.stats.Bedwars.final_deaths_bedwars || 0
+      let kills = (playerData?.stats?.Bedwars?.final_kills_bedwars) || 0
+      let deaths = (playerData?.stats?.Bedwars?.final_deaths_bedwars) || 0
       let fkdr = kills / deaths
+
+      if (isNaN(fkdr)) fkdr = 0
 
       let formatted = "&7"
 
@@ -55,17 +77,22 @@ const columns = [
       if (fkdr > 15) formatted = "&c"
       if (fkdr > 100) formatted = "&4"
 
-      formatted += isNaN(fkdr) ? "0" : fkdr.toFixed(2)
+      formatted += fkdr.toFixed(2)
 
       element.innerHTML = parseMinecraftColors(formatted)
+
+      return fkdr
     }
   },
   {
+    id: "wlr",
     name: "WLR",
     func: (playerData, element) => {
-      let wins = playerData.stats.Bedwars.wins_bedwars || 0
-      let losses = playerData.stats.Bedwars.losses_bedwars || 0
+      let wins = (playerData?.stats?.Bedwars?.wins_bedwars) || 0
+      let losses = (playerData?.stats?.Bedwars?.losses_bedwars) || 0
       let wlr = wins / losses
+
+      if (isNaN(wlr)) wlr = 0
 
       let formatted = "&7"
 
@@ -74,9 +101,11 @@ const columns = [
       if (wlr > 3) formatted = "&c"
       if (wlr > 6) formatted = "&4"
 
-      formatted += isNaN(wlr) ? "0" : wlr.toFixed(2)
+      formatted += wlr.toFixed(2)
 
       element.innerHTML = parseMinecraftColors(formatted)
+
+      return wlr
     }
   }
 ]
@@ -120,8 +149,12 @@ function closeApiKeyPrompt() {
 /**
  * Resets the table and its data
  */
-function resetTable() {
+function resetTable(resetData = true) {
   statsTable.innerHTML = ""
+  
+  if (resetData) {
+    usersOnTable = []
+  }
 
   const tr = document.createElement("tr")
 
@@ -138,11 +171,53 @@ function resetTable() {
   updateWindowHeight()
 }
 
+let usersOnTable = []
 /**
  * Adds a user to the table
- * @param {any} playerData 
  */
 function addUserToTable(playerData, name) {
+  usersOnTable.push({ playerData, name })
+}
+
+/**
+ * Rendedrs the actual table
+ */
+function renderTable() {
+  resetTable(false)
+
+  const sortBy = columns.find(column => column.id == getSortBy())
+
+  // Dummy element for the function
+  const element = document.createElement("template")
+
+  usersOnTable
+    .sort((a, b) => {
+      let aValue = 0, bValue = 0
+      try {
+        aValue = sortBy.func(a.playerData, element, { name: a.name })
+      } catch (e) {
+        console.log("Failed to sort A", a, e)
+      }
+
+      try {
+        bValue = sortBy.func(b.playerData, element, { name: b.name })
+      } catch (e) {
+        console.log("Failed to sort B", b, e)
+      }
+
+      return bValue - aValue
+    })  
+    .forEach(({playerData, name}) => {
+      renderUserToTable(playerData, name)
+    })
+  updateWindowHeight()
+}
+
+/**
+ * Renders a user to the table
+ * @param {any} playerData 
+ */
+function renderUserToTable(playerData, name) {
   const tr = document.createElement("tr")
 
   columns.forEach(column => {
@@ -190,6 +265,26 @@ fontSelector.addEventListener("change", event => {
   setFontStore(fontSelector.value)
   updateFont()
 })
+
+// Sort by
+const sortBySelector = document.getElementById("sortby")
+
+sortBySelector.addEventListener("change", () => {
+  setSortBy(sortBySelector.value)
+  renderTable()
+})
+
+columns.forEach(column => {
+  const element = document.createElement("option")
+  element.value = column.id
+  element.innerText = column.name
+  sortBySelector.appendChild(element)
+})
+
+if (getSortBy() == undefined) {
+  setSortBy("fkdr")
+}
+sortBySelector.value = getSortBy()
 
 updateFont()
 updateWindowHeight()
