@@ -1,3 +1,5 @@
+const { ipcRenderer } = require("electron")
+
 // Handles user interactions
 const promptElement = document.getElementById("prompt")
 const promptBackgroundElement = document.getElementById("prompt_background")
@@ -81,9 +83,20 @@ const columns = [
 
 document.body.addEventListener("keypress", event => {
   if (event.key == ",") {
-    promptApiKey()
+    if (promptElement.hidden) {
+      promptApiKey()
+    } else {
+      closePromptButton()
+    }
   }
 })
+
+/**
+ * Updates the window height to fit all the content
+ */
+function updateWindowHeight(height) {
+  ipcRenderer.send("resize-height", height || document.documentElement.getBoundingClientRect().height)
+}
 
 /**
  * Prompts user to set api key
@@ -91,6 +104,7 @@ document.body.addEventListener("keypress", event => {
 function promptApiKey() {
   promptElement.hidden = false
   promptBackgroundElement.hidden = false
+  updateWindowHeight(500)
 }
 
 /**
@@ -100,6 +114,7 @@ function closeApiKeyPrompt() {
   promptElement.hidden = true
   promptBackgroundElement.hidden = true
   apiKeyInput.value = ""
+  updateWindowHeight()
 }
 
 /**
@@ -119,6 +134,8 @@ function resetTable() {
   })
   
   statsTable.appendChild(tr)
+
+  updateWindowHeight()
 }
 
 /**
@@ -175,3 +192,4 @@ fontSelector.addEventListener("change", event => {
 })
 
 updateFont()
+updateWindowHeight()

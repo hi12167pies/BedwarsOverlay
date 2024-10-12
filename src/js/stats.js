@@ -42,6 +42,8 @@ async function loadStats(usernames) {
     }
     addUserToTable(user.stats, username)
   })
+
+  updateWindowHeight()
 }
 
 /**
@@ -117,6 +119,7 @@ function handleChatLogs(parsedLogs) {
       // Clear command
       if (["c", "cl"].includes(command.toLowerCase())) {
         resetTable()
+        return
       }
 
       // Add player command
@@ -127,6 +130,8 @@ function handleChatLogs(parsedLogs) {
         console.log(stats)
         addUserToTable(stats.player, user.name)
       }
+
+      updateWindowHeight()
     })
 }
 

@@ -33,8 +33,8 @@ const createWindow = () => {
 
   win.loadFile('src/index.html')
 
-  ipcMain.on('resize-window', (event, width, height) => {
-    win.setContentSize(width, height)
+  ipcMain.on('resize-height', (event, height) => {
+    win.setContentSize(win.getContentSize()[0], height)
   })
 }
 
