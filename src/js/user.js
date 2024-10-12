@@ -15,11 +15,13 @@ const statsTable = document.getElementById("stats")
  * id:   used to identify the column
  * name: shows in the gui
  * func: Returns a int for sorting
+ * (Optional) sortable: If this field can be sorted, true by default 
  */
 const columns = [
   {
     id: "name",
     name: "Username",
+    sortable: false,
     func: (playerData, element, extra) => {
       if (playerData == null) {
         element.innerHTML = parseMinecraftColors("&7" + extra.name + " &4(NICK)")
@@ -124,6 +126,7 @@ document.body.addEventListener("keypress", event => {
  * Updates the window height to fit all the content
  */
 function updateWindowHeight(height) {
+  if (!promptElement.hidden && height == undefined) return
   ipcRenderer.send("resize-height", height || document.documentElement.getBoundingClientRect().height)
 }
 
@@ -275,6 +278,8 @@ sortBySelector.addEventListener("change", () => {
 })
 
 columns.forEach(column => {
+  // tripple equals must be accurate!
+  if (column.sortable === false) return
   const element = document.createElement("option")
   element.value = column.id
   element.innerText = column.name
