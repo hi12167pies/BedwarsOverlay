@@ -20,4 +20,6 @@
 ## Why is everyone a nick?
 Your api key is invalid or you have reached a rate limit. Try resetting your key.
 
+# Image
+This may be outdated to the current version
 ![Preview](https://github.com/hi12167pies/BedwarsOverlay/blob/main/img/img1.png?raw=true)
