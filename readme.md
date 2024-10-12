@@ -8,4 +8,4 @@ Usage:
 3. In game use the `/who` command to list players. This will see your logs and update the gui.
 
 
-![Preview](https://github.com/hi12167pies/BedwarsOverlay/blob/main/img/Screenshot 2024-10-12 221138.png?raw=true)
+![Preview](https://github.com/hi12167pies/BedwarsOverlay/blob/main/img/img1.png?raw=true)
