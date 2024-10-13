@@ -130,6 +130,7 @@ function getHypixelPrefix(playerData) {
  * Adds colour to bedwars level
  */
 function getBedwarsStarColor(level) {
+  let star = getFont() == "Minecraftia" ? "" : "✫"
   let colorCode;
 
   const prestige = Math.floor(level / 100);
@@ -143,7 +144,7 @@ function getBedwarsStarColor(level) {
       return rainbowColors[i % chars.length] + char
     }).join("")
 
-    return `&c[${colourStar}&d✫&5]` 
+    return `&c[${colourStar}${star}&d&5]` 
   }
 
   switch (prestige) {
@@ -160,5 +161,5 @@ function getBedwarsStarColor(level) {
     default: colorCode = '&6';
   }
 
-  return `${colorCode}[${level}✫]`
+  return `${colorCode}[${level}${star}]`
 }
