@@ -192,6 +192,14 @@ function addUserToTable(playerData, name) {
 }
 
 /**
+ * Removes a player from the table
+ */
+function removePlayerFromTable(username) {
+  const index = usersOnTable.findIndex(user => user.name.toLowerCase() == username.toLowerCase())
+  usersOnTable.splice(index, 1)
+}
+
+/**
  * Renders the actual table
  */
 function renderTable() {

@@ -2,6 +2,11 @@
 
 ### This is just a side project, do not expect updates or for it to be good :)
 
+## Features
+- Use `/who` to load players in game
+- Auto remove players on final kill
+- Commands (see [Commands](#commands))
+
 ## Usage
 1. Set the path to your logs in `src/js/stats.js`
 2. Launch you will be put into the settings. Enter your api key here.
