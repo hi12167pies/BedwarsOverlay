@@ -5,7 +5,7 @@ let home = process.env.HOME
 if (home == undefined && process.env.HOMEPATH) {
   home = process.env.HOMEDRIVE + process.env.HOMEPATH
 }
-const logDirectory = path.join(home, ".lunarclient/offline/multiver/logs")
+const logDirectory = path.join(home, ".lunarclient", "logs/game")
 
 /**
  * Loads the stats of the users
