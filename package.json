@@ -8,9 +8,10 @@
     "make": "electron-forge make"
   },
   "keywords": [],
-  "author": "",
+  "author": "hi12167pies",
+  "authors": ["hi12167pies"],
   "license": "ISC",
-  "description": "",
+  "description": "A bedwars stats overlay",
   "devDependencies": {
     "@electron-forge/cli": "^7.5.0",
     "@electron-forge/maker-deb": "^7.5.0",
