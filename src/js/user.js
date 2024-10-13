@@ -320,5 +320,13 @@ combineStarElement.addEventListener("click", () => {
 })
 combineStarElement.checked = getCombineStar()
 
+// Final kill remove
+const finalKillRemove = document.getElementById("final-kill-remove")
+finalKillRemove.addEventListener("click", () => {
+  setFinalKillRemove(finalKillRemove.checked)
+  renderTable()
+})
+finalKillRemove.checked = getFinalKillRemove()
+
 updateFont()
 updateWindowHeight()

@@ -33,3 +33,15 @@ function getCombineStar() {
   if (localStorage.getItem("combine-star") == null) return false
   return JSON.parse(localStorage.getItem("combine-star"))
 }
+
+/**
+ * @param {boolean} combine 
+ */
+function setFinalKillRemove(combine) {
+  localStorage.setItem("final-kill-remove", JSON.stringify(combine))
+}
+
+function getFinalKillRemove() {
+  if (localStorage.getItem("final-kill-remove") == null) return true
+  return JSON.parse(localStorage.getItem("final-kill-remove"))
+}

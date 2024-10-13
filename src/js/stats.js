@@ -133,14 +133,16 @@ function handleChatLogs(parsedLogs) {
       renderTable()
     })
   
-  parsedLogs
+  if (getFinalKillRemove()){ 
+    parsedLogs
     .filter(log => log.includes("FINAL KILL!") && !log.includes(":")) // ignore : for chat messages
     .forEach(async message => {
       const player = message.split(" ")[0]
       removePlayerFromTable(player)
       renderTable()
     })
-
+  }
+  
 }
 
 /**
