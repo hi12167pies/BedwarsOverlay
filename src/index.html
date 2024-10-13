@@ -25,21 +25,28 @@
     </div>
     <hr>
 
-    <form id="api_key">
-      <input type="password" id="api_key_input" placeholder="API Key">
-      <input type="submit" value="Update API Key">
-    </form>
+    <div class="prompt-content">
+      
+      <form id="api_key">
+        <input type="password" id="api_key_input" placeholder="API Key">
+        <input type="submit" value="Update API Key">
+      </form>
 
-    <br>
+      <select id="font">
+        <option value="system-ui">System Font</option>
+        <option value="Minecraftia">Minecraftia Font</option>
+        <option value="Minecraft-Ten">Minecraft Ten Font</option>
+      </select>
 
-    <select id="font">
-      <option value="system-ui">System Font</option>
-      <option value="Minecraftia">Minecraftia Font</option>
-      <option value="Minecraft-Ten">Minecraft Ten Font</option>
-    </select>
+      &nbsp; Sort By: &nbsp;
+      <select id="sortby"></select>
 
-    &nbsp; Sort By: &nbsp;
-    <select id="sortby"></select>
+      <br>
+      
+      <input type="checkbox" id="combine-star"> <span>Combine stars with username.</span>
+
+    </div>
+
   </div>
     
   <table id="stats"></table>

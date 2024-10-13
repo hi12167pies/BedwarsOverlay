@@ -97,6 +97,10 @@ input[type=button], input[type=submit], button {
   inset: 0;
 }
 
+.prompt-content {
+  line-height: 45px;
+}
+
 /* Other */
 hr {
   border: none;

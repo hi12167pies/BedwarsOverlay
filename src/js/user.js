@@ -23,11 +23,18 @@ const columns = [
     name: "Username",
     sortable: false,
     func: (playerData, element, extra) => {
+      let level = (playerData?.achievements?.bedwars_level) || 0
+
+      let star = ""
+      if (getCombineStar()) {
+        star = parseMinecraftColors(getBedwarsStarColor(level)) + " "
+      }
+
       if (playerData == null) {
-        element.innerHTML = parseMinecraftColors("&7" + extra.name + " &4(NICK)")
+        element.innerHTML = star + parseMinecraftColors("&7" + extra.name + " &4(NICK)")
         return
       }
-      element.innerHTML = parseMinecraftColors(getHypixelPrefix(playerData)) + " " + extra.name
+      element.innerHTML =  star + parseMinecraftColors(getHypixelPrefix(playerData)) + " " + extra.name
 
       return 0
     }
@@ -36,8 +43,7 @@ const columns = [
     id: "star",
     name: "Stars",
     func: (playerData, element) => {
-      let level = playerData?.achievements?.bedwars_level
-      level = level || 0
+      let level = (playerData?.achievements?.bedwars_level) || 0
 
       element.innerHTML = parseMinecraftColors(getBedwarsStarColor(level))
 
@@ -117,7 +123,7 @@ document.body.addEventListener("keypress", event => {
     if (promptElement.hidden) {
       promptApiKey()
     } else {
-      closePromptButton()
+      closeApiKeyPrompt()
     }
   }
 })
@@ -164,6 +170,9 @@ function resetTable(resetData = true) {
   tr.classList.add("title")
 
   columns.forEach(column => {
+    if (getCombineStar() && column.id == "star") {
+      return
+    }
     const th = document.createElement("th")
     th.innerText = column.name
     tr.appendChild(th)
@@ -183,7 +192,7 @@ function addUserToTable(playerData, name) {
 }
 
 /**
- * Rendedrs the actual table
+ * Renders the actual table
  */
 function renderTable() {
   resetTable(false)
@@ -224,6 +233,9 @@ function renderUserToTable(playerData, name) {
   const tr = document.createElement("tr")
 
   columns.forEach(column => {
+    if (getCombineStar() && column.id == "star") {
+      return
+    }
     const td = document.createElement("td")
     try {
       column.func(playerData, td, { name })
@@ -290,6 +302,15 @@ if (getSortBy() == undefined) {
   setSortBy("fkdr")
 }
 sortBySelector.value = getSortBy()
+
+// Combine stars
+const combineStarElement = document.getElementById("combine-star")
+
+combineStarElement.addEventListener("click", () => {
+  setCombineStar(combineStarElement.checked)
+  renderTable()
+})
+combineStarElement.checked = getCombineStar()
 
 updateFont()
 updateWindowHeight()

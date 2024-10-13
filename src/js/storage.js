@@ -21,3 +21,15 @@ function setSortBy(id) {
 function getSortBy() {
   return localStorage.getItem("sortby")
 }
+
+/**
+ * @param {boolean} combine 
+ */
+function setCombineStar(combine) {
+  localStorage.setItem("combine-star", JSON.stringify(combine))
+}
+
+function getCombineStar() {
+  if (localStorage.getItem("combine-star") == null) return false
+  return JSON.parse(localStorage.getItem("combine-star"))
+}
